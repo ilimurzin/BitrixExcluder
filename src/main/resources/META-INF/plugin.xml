@@ -15,4 +15,13 @@
         <listener class="com.github.ilimurzin.bitrixexcluder.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <actions>
+        <action id="com.github.ilimurzin.bitrixexcluder.actions.ExcludeAction"
+                class="com.github.ilimurzin.bitrixexcluder.actions.ExcludeAction" text="Exclude Bitrix Directories"
+                description="Excludes Bitrix directories">
+            <add-to-group group-id="ProjectViewPopupMenuSettingsGroup" anchor="after"
+                          relative-to-action="MarkRootGroup"/>
+        </action>
+    </actions>
 </idea-plugin>
