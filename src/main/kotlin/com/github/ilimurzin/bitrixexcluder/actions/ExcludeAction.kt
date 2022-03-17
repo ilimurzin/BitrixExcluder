@@ -5,11 +5,12 @@ import com.github.ilimurzin.bitrixexcluder.isBitrixDirectory
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 
-class ExcludeAction : AnAction() {
+class ExcludeAction : AnAction(), DumbAware {
     override fun actionPerformed(e: AnActionEvent) {
         val project = getProject(e)
         val selectedElement = getSelectedElement(e)
