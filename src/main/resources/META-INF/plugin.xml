@@ -9,6 +9,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.ilimurzin.bitrixexcluder.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.ilimurzin.bitrixexcluder.services.MyProjectService"/>
+        <notificationGroup id="Excluder Notification Group" displayType="BALLOON" key="excluder.notification.group"/>
     </extensions>
 
     <applicationListeners>

@@ -33,7 +33,7 @@ class Excluder(
             ?: throw RuntimeException("Content root for $virtualFile is not found")
     }
 
-    private fun getUrlsToExclude(bitrixDirectory: VirtualFile): Collection<String> {
+    fun getUrlsToExclude(bitrixDirectory: VirtualFile): Collection<String> {
         val parent = getParentOfBitrixDirectory(bitrixDirectory)
 
         val directoriesToExclude = getBaseDirectories() + getModuleDirectories(parent)
@@ -66,5 +66,5 @@ class Excluder(
 }
 
 fun VirtualFile.isBitrixDirectory(): Boolean {
-    return isDirectory && name == "bitrix"
+    return isDirectory && name == "bitrix" && children.isNotEmpty()
 }
