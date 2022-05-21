@@ -1,25 +1,25 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.ilimurzin.bitrixexcluder</id>
+    <id>ru.ilimurzin.bitrixexcluder</id>
     <name>BitrixExcluder</name>
     <vendor>ilimurzin</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.ilimurzin.bitrixexcluder.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.ilimurzin.bitrixexcluder.services.MyProjectService"/>
+        <applicationService serviceImplementation="ru.ilimurzin.bitrixexcluder.services.MyApplicationService"/>
+        <projectService serviceImplementation="ru.ilimurzin.bitrixexcluder.services.MyProjectService"/>
         <notificationGroup id="Excluder Notification Group" displayType="BALLOON" key="excluder.notification.group"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.ilimurzin.bitrixexcluder.listeners.MyProjectManagerListener"
+        <listener class="ru.ilimurzin.bitrixexcluder.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 
     <actions>
-        <action id="com.github.ilimurzin.bitrixexcluder.actions.ExcludeAction"
-                class="com.github.ilimurzin.bitrixexcluder.actions.ExcludeAction" text="Exclude Bitrix Directories"
+        <action id="ru.ilimurzin.bitrixexcluder.actions.ExcludeAction"
+                class="ru.ilimurzin.bitrixexcluder.actions.ExcludeAction" text="Exclude Bitrix Directories"
                 description="Excludes Bitrix directories">
             <add-to-group group-id="ProjectViewPopupMenuSettingsGroup" anchor="after"
                           relative-to-action="MarkRootGroup"/>

@@ -1,7 +1,7 @@
-package com.github.ilimurzin.bitrixexcluder.actions
+package ru.ilimurzin.bitrixexcluder.actions
 
-import com.github.ilimurzin.bitrixexcluder.Excluder
-import com.github.ilimurzin.bitrixexcluder.isBitrixDirectory
+import ru.ilimurzin.bitrixexcluder.Excluder
+import ru.ilimurzin.bitrixexcluder.isBitrixDirectory
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys

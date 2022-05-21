@@ -1,4 +1,4 @@
-package com.github.ilimurzin.bitrixexcluder
+package ru.ilimurzin.bitrixexcluder
 
 import com.intellij.ide.highlighter.XmlFileType
 import com.intellij.psi.xml.XmlFile

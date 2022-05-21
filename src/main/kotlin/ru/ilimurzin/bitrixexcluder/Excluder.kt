@@ -1,4 +1,4 @@
-package com.github.ilimurzin.bitrixexcluder
+package ru.ilimurzin.bitrixexcluder
 
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleUtil

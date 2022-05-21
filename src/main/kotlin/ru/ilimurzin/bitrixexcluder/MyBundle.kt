@@ -1,4 +1,4 @@
-package com.github.ilimurzin.bitrixexcluder
+package ru.ilimurzin.bitrixexcluder
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

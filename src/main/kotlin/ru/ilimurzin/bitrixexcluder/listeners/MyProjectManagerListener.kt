@@ -1,8 +1,8 @@
-package com.github.ilimurzin.bitrixexcluder.listeners
+package ru.ilimurzin.bitrixexcluder.listeners
 
-import com.github.ilimurzin.bitrixexcluder.Excluder
-import com.github.ilimurzin.bitrixexcluder.isBitrixDirectory
-import com.github.ilimurzin.bitrixexcluder.services.MyProjectService
+import ru.ilimurzin.bitrixexcluder.Excluder
+import ru.ilimurzin.bitrixexcluder.isBitrixDirectory
+import ru.ilimurzin.bitrixexcluder.services.MyProjectService
 import com.intellij.notification.NotificationAction
 import com.intellij.notification.NotificationGroupManager
 import com.intellij.openapi.components.service
