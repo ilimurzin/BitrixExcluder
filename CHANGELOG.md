@@ -3,6 +3,8 @@
 # BitrixExcluder Changelog
 
 ## [Unreleased]
+### Fixed
+- Removed version requirement
 
 ## [1.0.0]
 ### Added
