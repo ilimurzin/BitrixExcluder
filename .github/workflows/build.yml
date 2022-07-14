@@ -81,6 +81,10 @@ jobs:
       - name: Run Verify Plugin task
         run: ./gradlew verifyPlugin
 
+      # Build Plugin
+      - name: Build Plugin
+        run: ./gradlew buildPlugin
+
       # Run Qodana inspections
       - name: Qodana - Code Inspection
         uses: JetBrains/qodana-action@v4.2.5
