@@ -11,6 +11,11 @@ import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
 
 class ExcludeAction : AnAction(), DumbAware {
+    override fun update(e: AnActionEvent) {
+        val selectedElement = e.getData(CommonDataKeys.VIRTUAL_FILE)
+        e.presentation.isEnabledAndVisible = selectedElement !== null && selectedElement.isDirectory
+    }
+
     override fun actionPerformed(e: AnActionEvent) {
         val project = getProject(e)
         val selectedElement = getSelectedElement(e)

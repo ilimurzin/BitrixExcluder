@@ -3,6 +3,8 @@
 # BitrixExcluder Changelog
 
 ## [Unreleased]
+### Fixed
+- Show action only for directories
 
 ## [1.0.2]
 ### Fixed
