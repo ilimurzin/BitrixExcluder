@@ -1,8 +1,5 @@
 package ru.ilimurzin.bitrixexcluder.listeners
 
-import ru.ilimurzin.bitrixexcluder.Excluder
-import ru.ilimurzin.bitrixexcluder.isBitrixDirectory
-import ru.ilimurzin.bitrixexcluder.services.MyProjectService
 import com.intellij.notification.NotificationAction
 import com.intellij.notification.NotificationGroupManager
 import com.intellij.openapi.components.service
@@ -12,6 +9,9 @@ import com.intellij.openapi.project.ProjectManagerListener
 import com.intellij.openapi.project.guessProjectDir
 import com.intellij.openapi.project.rootManager
 import com.intellij.openapi.vfs.VirtualFile
+import ru.ilimurzin.bitrixexcluder.Excluder
+import ru.ilimurzin.bitrixexcluder.isBitrixDirectory
+import ru.ilimurzin.bitrixexcluder.services.MyProjectService
 
 internal class MyProjectManagerListener : ProjectManagerListener {
 

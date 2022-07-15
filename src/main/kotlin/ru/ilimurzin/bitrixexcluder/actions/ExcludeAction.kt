@@ -1,7 +1,5 @@
 package ru.ilimurzin.bitrixexcluder.actions
 
-import ru.ilimurzin.bitrixexcluder.Excluder
-import ru.ilimurzin.bitrixexcluder.isBitrixDirectory
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -9,6 +7,8 @@ import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
+import ru.ilimurzin.bitrixexcluder.Excluder
+import ru.ilimurzin.bitrixexcluder.isBitrixDirectory
 
 class ExcludeAction : AnAction(), DumbAware {
     override fun update(e: AnActionEvent) {
