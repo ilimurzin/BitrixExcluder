@@ -3,38 +3,40 @@ package ru.ilimurzin.bitrixexcluder
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleUtil
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.project.rootManager
 import com.intellij.openapi.roots.ModuleRootModificationUtil
 import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.vfs.VirtualFile
 
-class Excluder(
+class BitrixDirectory(
+    private val virtualFile: VirtualFile,
     private val project: Project,
 ) {
-    fun excludeBitrixDirectories(bitrixDirectory: VirtualFile) {
-        if (!bitrixDirectory.isBitrixDirectory()) {
-            throw IllegalArgumentException("Passed file is not bitrix directory")
-        }
+    init {
+        require(virtualFile.isBitrixDirectory()) { "Passed file is not bitrix directory" }
+    }
 
+    fun excludeDirectories() {
         ModuleRootModificationUtil.updateExcludedFolders(
-            getModule(bitrixDirectory),
-            getContentRoot(bitrixDirectory),
+            getModule(),
+            getContentRoot(),
             emptyList(),
-            getUrlsToExclude(bitrixDirectory)
+            getUrlsToExclude()
         )
     }
 
-    private fun getModule(virtualFile: VirtualFile): Module {
+    private fun getModule(): Module {
         return ModuleUtil.findModuleForFile(virtualFile, project)
             ?: throw RuntimeException("Module for $virtualFile not found")
     }
 
-    private fun getContentRoot(virtualFile: VirtualFile): VirtualFile {
+    private fun getContentRoot(): VirtualFile {
         return ProjectRootManager.getInstance(project).fileIndex.getContentRootForFile(virtualFile)
             ?: throw RuntimeException("Content root for $virtualFile is not found")
     }
 
-    fun getUrlsToExclude(bitrixDirectory: VirtualFile): Collection<String> {
-        val parent = getParentOfBitrixDirectory(bitrixDirectory)
+    private fun getUrlsToExclude(): Collection<String> {
+        val parent = getParentOfBitrixDirectory(virtualFile)
 
         val directoriesToExclude = getBaseDirectories() + getModuleDirectories(parent)
 
@@ -65,6 +67,21 @@ class Excluder(
         }
 
         return modulesDirectory.children.filter { it.isDirectory }.map { "bitrix/modules/${it.name}/install" }
+    }
+
+    fun isDirectoriesExcluded(): Boolean {
+        val module = ModuleUtil.findModuleForFile(virtualFile, project)
+            ?: throw RuntimeException("Module for $virtualFile not found")
+
+        val urlsToExclude = getUrlsToExclude()
+
+        module.rootManager.contentEntries.forEach {
+            if (it.excludeFolderUrls.containsAll(urlsToExclude)) {
+                return true
+            }
+        }
+
+        return false
     }
 }
 

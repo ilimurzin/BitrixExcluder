@@ -3,13 +3,11 @@ package ru.ilimurzin.bitrixexcluder.listeners
 import com.intellij.notification.NotificationAction
 import com.intellij.notification.NotificationGroupManager
 import com.intellij.openapi.components.service
-import com.intellij.openapi.module.ModuleUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener
 import com.intellij.openapi.project.guessProjectDir
-import com.intellij.openapi.project.rootManager
 import com.intellij.openapi.vfs.VirtualFile
-import ru.ilimurzin.bitrixexcluder.Excluder
+import ru.ilimurzin.bitrixexcluder.BitrixDirectory
 import ru.ilimurzin.bitrixexcluder.isBitrixDirectory
 import ru.ilimurzin.bitrixexcluder.services.MyProjectService
 
@@ -20,15 +18,21 @@ internal class MyProjectManagerListener : ProjectManagerListener {
 
         val bitrixDirectory = guessBitrixDirectory(project)
 
-        if (bitrixDirectory != null && !isBitrixDirectoriesExcluded(bitrixDirectory, project)) {
+        if (bitrixDirectory != null && !bitrixDirectory.isDirectoriesExcluded()) {
             askToExcludeBitrixDirectories(bitrixDirectory, project)
         }
     }
 
-    private fun guessBitrixDirectory(project: Project): VirtualFile? {
+    private fun guessBitrixDirectory(project: Project): BitrixDirectory? {
         val projectDirectory = getProjectDirectory(project)
 
-        return findBitrixChild(projectDirectory, searchLimit = 2)
+        val virtualFile = findBitrixChild(projectDirectory, searchLimit = 2)
+
+        if (virtualFile == null) {
+            return null
+        }
+
+        return BitrixDirectory(virtualFile, project)
     }
 
     private fun getProjectDirectory(project: Project): VirtualFile {
@@ -63,29 +67,14 @@ internal class MyProjectManagerListener : ProjectManagerListener {
         return null
     }
 
-    private fun isBitrixDirectoriesExcluded(bitrixDirectory: VirtualFile, project: Project): Boolean {
-        val module = ModuleUtil.findModuleForFile(bitrixDirectory, project)
-            ?: throw RuntimeException("Module for $bitrixDirectory not found")
-
-        val urlsToExclude = Excluder(project).getUrlsToExclude(bitrixDirectory)
-
-        module.rootManager.contentEntries.forEach {
-            if (it.excludeFolderUrls.containsAll(urlsToExclude)) {
-                return true
-            }
-        }
-
-        return false
-    }
-
-    private fun askToExcludeBitrixDirectories(bitrixDirectory: VirtualFile, project: Project) {
+    private fun askToExcludeBitrixDirectories(bitrixDirectory: BitrixDirectory, project: Project) {
         NotificationGroupManager.getInstance().getNotificationGroup("Excluder Notification Group")
             .createNotification(
                 "Bitrix directory found",
                 "Do you want to exclude Bitrix directories? This will speed up indexing.",
             )
             .addAction(NotificationAction.createSimpleExpiring("Exclude Bitrix directories") {
-                Excluder(project).excludeBitrixDirectories(bitrixDirectory)
+                bitrixDirectory.excludeDirectories()
             })
             .notify(project)
     }

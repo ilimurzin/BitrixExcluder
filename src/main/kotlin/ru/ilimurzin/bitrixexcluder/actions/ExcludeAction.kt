@@ -7,7 +7,7 @@ import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.vfs.VirtualFile
-import ru.ilimurzin.bitrixexcluder.Excluder
+import ru.ilimurzin.bitrixexcluder.BitrixDirectory
 import ru.ilimurzin.bitrixexcluder.isBitrixDirectory
 
 class ExcludeAction : AnAction(), DumbAware {
@@ -21,9 +21,9 @@ class ExcludeAction : AnAction(), DumbAware {
         val selectedElement = getSelectedElement(e)
 
         if (selectedElement.isBitrixDirectory()) {
-            Excluder(project).excludeBitrixDirectories(selectedElement)
+            BitrixDirectory(selectedElement, project).excludeDirectories()
         } else if (isParentOfBitrixDirectory(selectedElement)) {
-            Excluder(project).excludeBitrixDirectories(selectedElement.findChild("bitrix")!!)
+            BitrixDirectory(selectedElement.findChild("bitrix")!!, project).excludeDirectories()
         } else {
             Messages.showMessageDialog(
                 project,
