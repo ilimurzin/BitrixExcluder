@@ -71,7 +71,15 @@ internal class MyProjectManagerListener : ProjectManagerListener {
         NotificationGroupManager.getInstance().getNotificationGroup("Excluder Notification Group")
             .createNotification(
                 "Bitrix directory found",
-                "Do you want to exclude Bitrix directories? This will speed up indexing.",
+                buildString {
+                    append("Do you want to exclude Bitrix directories? This will speed up indexing.")
+                    append("<br><br>Directories that will be excluded: ")
+                    val baseDirectoriesToExclude = bitrixDirectory.getBaseDirectoriesToExclude()
+                    if (!baseDirectoriesToExclude.isEmpty()) {
+                        append(baseDirectoriesToExclude.joinToString() + " and ")
+                    }
+                    append("modules `install` directories.")
+                }
             )
             .addAction(NotificationAction.createSimpleExpiring("Exclude Bitrix directories") {
                 bitrixDirectory.excludeDirectories()

@@ -35,6 +35,28 @@ class BitrixDirectory(
             ?: throw RuntimeException("Content root for $virtualFile is not found")
     }
 
+    fun getBaseDirectoriesToExclude(): Collection<String> {
+        if (isDirectoriesExcluded()) {
+            return emptyList()
+        }
+
+        val parent = getParentOfBitrixDirectory(virtualFile)
+
+        val baseDirectories = getBaseDirectories()
+            .associateWith { parent.findFileByRelativePath(it)?.url }
+            .filter { it.value != null }
+
+        if (baseDirectories.isEmpty()) {
+            return emptyList()
+        }
+
+        val excludedDirectories = getModule().rootManager.contentEntries.flatMap { it.excludeFolderUrls }
+
+        return baseDirectories
+            .filterNot { it.value in excludedDirectories }
+            .map { it.key }
+    }
+
     private fun getUrlsToExclude(): Collection<String> {
         val parent = getParentOfBitrixDirectory(virtualFile)
 
@@ -70,12 +92,9 @@ class BitrixDirectory(
     }
 
     fun isDirectoriesExcluded(): Boolean {
-        val module = ModuleUtil.findModuleForFile(virtualFile, project)
-            ?: throw RuntimeException("Module for $virtualFile not found")
-
         val urlsToExclude = getUrlsToExclude()
 
-        module.rootManager.contentEntries.forEach {
+        getModule().rootManager.contentEntries.forEach {
             if (it.excludeFolderUrls.containsAll(urlsToExclude)) {
                 return true
             }
