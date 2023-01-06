@@ -51,6 +51,9 @@ class Excluder(
             "upload",
             "bitrix/cache",
             "bitrix/managed_cache",
+            "bitrix/stack_cache",
+            "bitrix/tmp",
+            "bitrix/updates",
         )
     }
 

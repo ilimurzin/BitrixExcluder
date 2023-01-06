@@ -3,6 +3,8 @@
 # BitrixExcluder Changelog
 
 ## [Unreleased]
+### Added
+- Exclude stack_cache, tmp and updates directories
 ### Fixed
 - Show action only for directories
 
