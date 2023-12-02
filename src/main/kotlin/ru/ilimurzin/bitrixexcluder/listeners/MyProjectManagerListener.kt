@@ -2,6 +2,7 @@ package ru.ilimurzin.bitrixexcluder.listeners
 
 import com.intellij.notification.NotificationAction
 import com.intellij.notification.NotificationGroupManager
+import com.intellij.notification.NotificationType
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener
@@ -79,7 +80,8 @@ internal class MyProjectManagerListener : ProjectManagerListener {
                         append(baseDirectoriesToExclude.joinToString() + " and ")
                     }
                     append("modules `install` directories.")
-                }
+                },
+                NotificationType.INFORMATION
             )
             .addAction(NotificationAction.createSimpleExpiring("Exclude Bitrix directories") {
                 bitrixDirectory.excludeDirectories()
