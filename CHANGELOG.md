@@ -7,6 +7,7 @@
 ### Added
 
 - Exclude stack_cache, tmp and updates directories
+- List the directories that will be excluded in the notification
 
 ### Fixed
 
