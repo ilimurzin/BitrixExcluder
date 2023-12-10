@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [1.1.0] - 2023-12-10
+
 ### Added
 
 - Exclude stack_cache, tmp and updates directories
@@ -25,3 +27,8 @@
 
 - Exclude action
 - Notification when project opened
+
+[Unreleased]: https://github.com/ilimurzin/BitrixExcluder/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/ilimurzin/BitrixExcluder/compare/v1.0.2...v1.1.0
+[1.0.2]: https://github.com/ilimurzin/BitrixExcluder/compare/v1.0.0...v1.0.2
+[1.0.0]: https://github.com/ilimurzin/BitrixExcluder/commits/v1.0.0
