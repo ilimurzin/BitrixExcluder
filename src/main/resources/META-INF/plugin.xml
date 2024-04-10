@@ -7,8 +7,6 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="ru.ilimurzin.bitrixexcluder.services.MyApplicationService"/>
-        <projectService serviceImplementation="ru.ilimurzin.bitrixexcluder.services.MyProjectService"/>
         <notificationGroup id="Excluder Notification Group" displayType="BALLOON" key="excluder.notification.group"/>
         <backgroundPostStartupActivity implementation="ru.ilimurzin.bitrixexcluder.Startup"/>
     </extensions>

@@ -3,17 +3,13 @@ package ru.ilimurzin.bitrixexcluder
 import com.intellij.notification.NotificationAction
 import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationType
-import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.guessProjectDir
 import com.intellij.openapi.startup.StartupActivity
 import com.intellij.openapi.vfs.VirtualFile
-import ru.ilimurzin.bitrixexcluder.services.MyProjectService
 
 internal class Startup : StartupActivity.Background {
     override fun runActivity(project: Project) {
-        project.service<MyProjectService>()
-
         val bitrixDirectory = guessBitrixDirectory(project)
 
         if (bitrixDirectory != null && !bitrixDirectory.isDirectoriesExcluded()) {
