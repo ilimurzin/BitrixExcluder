@@ -10,12 +10,8 @@
         <applicationService serviceImplementation="ru.ilimurzin.bitrixexcluder.services.MyApplicationService"/>
         <projectService serviceImplementation="ru.ilimurzin.bitrixexcluder.services.MyProjectService"/>
         <notificationGroup id="Excluder Notification Group" displayType="BALLOON" key="excluder.notification.group"/>
+        <backgroundPostStartupActivity implementation="ru.ilimurzin.bitrixexcluder.Startup"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="ru.ilimurzin.bitrixexcluder.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 
     <actions>
         <action id="ru.ilimurzin.bitrixexcluder.actions.ExcludeAction"

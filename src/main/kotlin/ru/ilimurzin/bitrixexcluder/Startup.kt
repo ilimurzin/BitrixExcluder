@@ -1,20 +1,17 @@
-package ru.ilimurzin.bitrixexcluder.listeners
+package ru.ilimurzin.bitrixexcluder
 
 import com.intellij.notification.NotificationAction
 import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.project.ProjectManagerListener
 import com.intellij.openapi.project.guessProjectDir
+import com.intellij.openapi.startup.StartupActivity
 import com.intellij.openapi.vfs.VirtualFile
-import ru.ilimurzin.bitrixexcluder.BitrixDirectory
-import ru.ilimurzin.bitrixexcluder.isBitrixDirectory
 import ru.ilimurzin.bitrixexcluder.services.MyProjectService
 
-internal class MyProjectManagerListener : ProjectManagerListener {
-
-    override fun projectOpened(project: Project) {
+internal class Startup : StartupActivity.Background {
+    override fun runActivity(project: Project) {
         project.service<MyProjectService>()
 
         val bitrixDirectory = guessBitrixDirectory(project)
