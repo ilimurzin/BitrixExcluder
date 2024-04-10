@@ -1,5 +1,6 @@
 package ru.ilimurzin.bitrixexcluder.actions
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -11,6 +12,10 @@ import ru.ilimurzin.bitrixexcluder.BitrixDirectory
 import ru.ilimurzin.bitrixexcluder.isBitrixDirectory
 
 class ExcludeAction : AnAction(), DumbAware {
+    override fun getActionUpdateThread(): ActionUpdateThread {
+        return ActionUpdateThread.BGT
+    }
+
     override fun update(e: AnActionEvent) {
         val selectedElement = e.getData(CommonDataKeys.VIRTUAL_FILE)
         e.presentation.isEnabledAndVisible = selectedElement !== null && selectedElement.isDirectory
