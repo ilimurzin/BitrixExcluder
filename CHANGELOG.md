@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed deprecations
+
 ## [1.1.0] - 2023-12-10
 
 ### Added
